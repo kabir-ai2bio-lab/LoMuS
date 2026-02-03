@@ -1,4 +1,11 @@
-# LoMuS-repository
+# Welcome to LoMuS's Documentation!
+This repository corresponds to the article titled **"LoMuS: Low-Rank Adaptation with Multimodal Representations Improves Protein Stability Prediction"**.
+
+## Remarks
+- LoMuS is currently in review. Therefore, the repository is subject to change.
+- [![DOI](https://zenodo.org/badge/DOI/10.64898/2025.12.15.694540.svg)](https://doi.org/10.64898/2025.12.15.694540)
+- [bioRxiv Paper](https://www.biorxiv.org/content/10.64898/2025.12.15.694540v1)
+- [Code correspond to bioRxiv](https://zenodo.org/records/18471102)
 
 # Running Tsuboyama dataset:  
 step 1:   
