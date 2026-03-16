@@ -10,13 +10,17 @@ This repository corresponds to the article titled **"LoMuS: Low-Rank Adaptation 
 # Running Tsuboyama dataset:  
 step 1:   
 ```
-conda activate /data/sinfante/envs/tape  
+conda create -n tape python=3.10.18
+conda activate tape  
 pip install --no-input "datasets==2.20.0" "pyarrow>=10" fsspec  
 ```
 
 step 2:  
 ```
-cd ~/protstab/external/EsmTherm  
+mkdir -p external
+cd external
+git clone https://github.com/SimonKitSangChu/EsmTherm.git
+cd EsmTherm  
 mv datasets esmt_data 2>/dev/null || true  
 ln -s esmt_data datasets 2>/dev/null || true   
 [ -f requirements.txt ] && pip install --no-input -r requirements.txt  
@@ -25,14 +29,10 @@ pip install -e .
 
 step 3:  
 ```
-cd ~/protstab/external/EsmTherm  
 python prebuild_dataset.py  
 ```
 ```
-python build_dataset.py \  
-  --dataset_dir esmt_data/dataset \  
-  --csv        esmt_data/analysis/filtered_data.csv \  
-  --split_csv  esmt_data/wildtype_split.csv  
+python build_dataset.py --dataset_dir esmt_data/dataset --csv esmt_data/analysis/filtered_data.csv --split_csv esmt_data/wildtype_split.csv  
 ```
 ```
 ls -lh esmt_data/dataset
@@ -41,9 +41,7 @@ ls -lh esmt_data/dataset
 
 step 4:
 ```
-python ~/protstab/scripts/esmtherm_to_lomus.py \    
-  --split_dir  ~/protstab/external/EsmTherm/esmt_data/dataset \  
-  --out_root   ~/protstab/data/dms_one/tsub_mega  
+python ~/protstab/scripts/esmtherm_to_lomus.py  --split_dir  ~/protstab/external/EsmTherm/esmt_data/dataset --out_root   ~/protstab/data/dms_one/tsub_mega  
 
 head -n 3 ~/protstab/data/dms_one/tsub_mega/train.csv  
 ```
@@ -52,7 +50,7 @@ step 5:
 Run the features_CSV.py code to generate the per-sequence features:
 ```
 cd ~/protstab  
-python features.py --root data/dms_one --protein tsub_mega  
+python features_CSV.py --root data/dms_one --protein tsub_mega  
 ```
 
 step 6:
